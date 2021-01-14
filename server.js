@@ -136,6 +136,20 @@ app.post("/api/v1/restaurants/:id/addReview", async (req, res) => {
     }
 })
 
+//Delete review
+app.delete("/api/v1/restaurants/deleteReview/:id", async (req, res) => {
+    try {
+        const results = client.query("DELETE FROM reviews where id = $1", 
+        [req.params.id]);
+        res.status(204).json({
+            status: "success", 
+        })
+    } catch(err) {
+        console.log(err)
+    }
+    
+})
+
 });
 });
 const port = process.env.PORT || 3001;
